@@ -307,7 +307,7 @@ with tab2:
         return "color: #DC2626; font-weight:600"
 
     st.dataframe(
-        fleet_df.style.applymap(color_otif, subset=["otif_pct"])
+        fleet_df.style.map(color_otif, subset=["otif_pct"])
                       .format({"otif_pct": "{:.1f}%", "sla_score": "{:.1f}",
                                "cost_per_ship": "${:.2f}", "avg_delay_days": "{:.1f}d",
                                "invoice_variance_usd": "${:,.0f}"}),
@@ -533,7 +533,7 @@ with tab3:
     st.dataframe(
         delta_df[["vendor", "otif_current", "otif_prior", "otif_delta",
                    "cost_current", "cost_prior", "cost_delta_pct", "volume_delta_pct", "flagged"]]
-        .style.applymap(
+        .style.map(
             lambda v: "color:#DC2626;font-weight:600" if isinstance(v, float) and v < -3
                  else ("color:#16A34A;font-weight:600" if isinstance(v, float) and v > 3 else ""),
             subset=["otif_delta"]
